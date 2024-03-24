@@ -11,13 +11,13 @@ export const createPrediction = async (req, res) => {
     };
 
     //Call the Flowise Endpoint
-    const Response = await fetch(
+    const response = await fetch(
       `${process.env.FLOWISE_URL}/api/v1/prediction/${process.env.FLOW_ID}`,
     {
       method:"POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${Process.env.FLOWISE_API_KEY}`,
+        Authorization: `Bearer ${process.env.FLOWISE_API_KEY}`
       },
       body: JSON.stringify(flowiseData),
     }
@@ -27,8 +27,7 @@ export const createPrediction = async (req, res) => {
     console.log(data);
 
 
-
-    res.status(200).json({ message: data });
+    res.status(200).json({ message: data.text });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
